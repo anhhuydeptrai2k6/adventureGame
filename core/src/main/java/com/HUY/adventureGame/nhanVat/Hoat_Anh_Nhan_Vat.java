@@ -8,6 +8,8 @@ public class Hoat_Anh_Nhan_Vat {
 
     private Texture[] dungyen = new Texture[11];
     private Texture[] chay = new Texture[12];
+    private Texture nhay;
+    private Texture roi;
 
     private float timedoiframe = 0;
     private int frame = 0;
@@ -38,6 +40,10 @@ public class Hoat_Anh_Nhan_Vat {
         chay[9] = new Texture("nhanvat/chay/chay009.png");
         chay[10] = new Texture("nhanvat/chay/chay010.png");
         chay[11] = new Texture("nhanvat/chay/chay011.png");
+
+        nhay = new Texture("nhanvat/nhay/nhay.png");
+
+        roi = new Texture("nhanvat/roi/roi.png");
     }
 
     public void capnhat(float delta, TRANGTHAI trangthai){
@@ -67,6 +73,12 @@ public class Hoat_Anh_Nhan_Vat {
                 break;
             case CHAY:
                 veNhanVat = chay[frame];
+                break;
+            case NHAY:
+                veNhanVat = nhay;
+                break;
+            case ROI:
+                veNhanVat = roi;
         }
         if (flipX){
             batch.draw(veNhanVat, x + 32, y, -32, 32);

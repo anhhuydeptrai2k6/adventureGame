@@ -20,6 +20,9 @@ public class Thao_Tac extends InputAdapter {
             case Input.Keys.RIGHT:
                 diChuyen.sangphai();;
                 break;
+            case Input.Keys.UP:
+                diChuyen.nhay();
+                break;
         }
         return true;
     }
@@ -31,6 +34,8 @@ public class Thao_Tac extends InputAdapter {
             case Input.Keys.RIGHT:
                 diChuyen.dungim();
                 break;
+            case Input.Keys.UP:
+                diChuyen.roi();
         }
         return true;
     }

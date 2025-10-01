@@ -1,5 +1,7 @@
 package com.HUY.adventureGame.nhanVat;
 
+import com.badlogic.gdx.Gdx;
+
 public class Di_Chuyen {
     private float x, y;
     private float vX = 0, vY = 0;
@@ -9,6 +11,7 @@ public class Di_Chuyen {
 
     private boolean flipX = false;
     private boolean dangdungdat = true;
+    private boolean dangnhay = false;
 
     private TRANGTHAI trangthai = TRANGTHAI.DUNGYEN;
 
@@ -22,16 +25,39 @@ public class Di_Chuyen {
         flipX = true;
         trangthai = TRANGTHAI.CHAY;
     }
-
     public void dungim(){
         vX = 0;
         if (dangdungdat){
             trangthai = TRANGTHAI.DUNGYEN;
         }
     }
+    public void nhay(){
+        if (dangdungdat && !dangnhay){
+            vY = lucNhay;
+            dangdungdat = false;
+            dangnhay = true;
+            trangthai = TRANGTHAI.NHAY;
+        }
+    }
+    public void roi(){
+        if (!dangdungdat && dangnhay){
+            trangthai = TRANGTHAI.ROI;
+        }
+    }
 
     public void capnhat(float delta){
         x += vX * delta;
+        y += vY * delta;
+        vY += trongLuc*delta;
+        if (y < 0){
+            vY = 0;
+            y = 0;
+            dangdungdat = true;
+            dangnhay = false;
+            if (vX == 0){
+                trangthai = TRANGTHAI.DUNGYEN;
+            }else trangthai = TRANGTHAI.CHAY;
+        }
     }
 
     public float getX(){
