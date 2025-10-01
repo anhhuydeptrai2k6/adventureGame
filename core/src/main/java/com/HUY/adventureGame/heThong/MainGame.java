@@ -1,5 +1,6 @@
-package com.HUY.adventureGame;
+package com.HUY.adventureGame.heThong;
 
+import com.HUY.adventureGame.ManHinhChinh;
 import com.badlogic.gdx.Game;
 
 

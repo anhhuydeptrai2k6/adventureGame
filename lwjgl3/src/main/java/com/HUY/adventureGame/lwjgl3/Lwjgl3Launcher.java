@@ -2,7 +2,7 @@ package com.HUY.adventureGame.lwjgl3;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.HUY.adventureGame.MainGame;
+import com.HUY.adventureGame.heThong.MainGame;
 
 public class Lwjgl3Launcher {
     public static void main(String[] args) {
