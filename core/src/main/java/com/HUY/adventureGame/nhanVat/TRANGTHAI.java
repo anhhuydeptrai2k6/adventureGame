@@ -4,6 +4,7 @@ public enum TRANGTHAI {
     DUNGYEN,
     CHAY,
     NHAY,
+    NHAYKEP,
     ROI,
 
 }

@@ -9,6 +9,7 @@ public class Hoat_Anh_Nhan_Vat {
     private Texture[] dungyen = new Texture[11];
     private Texture[] chay = new Texture[12];
     private Texture nhay;
+    private Texture[] nhaykep = new Texture[6];
     private Texture roi;
 
     private float timedoiframe = 0;
@@ -42,6 +43,12 @@ public class Hoat_Anh_Nhan_Vat {
         chay[11] = new Texture("nhanvat/chay/chay011.png");
 
         nhay = new Texture("nhanvat/nhay/nhay.png");
+        nhaykep[0] = new Texture("nhanvat/nhay/nhaykep000.png");
+        nhaykep[1] = new Texture("nhanvat/nhay/nhaykep001.png");
+        nhaykep[2] = new Texture("nhanvat/nhay/nhaykep002.png");
+        nhaykep[3] = new Texture("nhanvat/nhay/nhaykep003.png");
+        nhaykep[4] = new Texture("nhanvat/nhay/nhaykep004.png");
+        nhaykep[5] = new Texture("nhanvat/nhay/nhaykep005.png");
 
         roi = new Texture("nhanvat/roi/roi.png");
     }
@@ -51,14 +58,21 @@ public class Hoat_Anh_Nhan_Vat {
             case DUNGYEN:
                 timedoiframe += Gdx.graphics.getDeltaTime();
                 if (timedoiframe > 0.05f){
-                    frame = (frame + 1) % 11;
+                    frame = (frame + 1) % dungyen.length;
                     timedoiframe = 0;
                 }
                 break;
             case CHAY:
                 timedoiframe += Gdx.graphics.getDeltaTime();
                 if (timedoiframe > 0.05f){
-                    frame = (frame + 1) % 12;
+                    frame = (frame + 1) % chay.length;
+                    timedoiframe = 0;
+                }
+                break;
+            case NHAYKEP:
+                timedoiframe += Gdx.graphics.getDeltaTime();
+                if (timedoiframe > 0.05f){
+                    frame = (frame + 1) % nhaykep.length;
                     timedoiframe = 0;
                 }
                 break;
@@ -77,8 +91,12 @@ public class Hoat_Anh_Nhan_Vat {
             case NHAY:
                 veNhanVat = nhay;
                 break;
+            case NHAYKEP:
+                veNhanVat = nhaykep[frame];
+                break;
             case ROI:
                 veNhanVat = roi;
+                break;
         }
         if (flipX){
             batch.draw(veNhanVat, x + 32*2, y, -(32*2), 32*2);

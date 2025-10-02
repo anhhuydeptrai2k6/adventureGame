@@ -7,7 +7,9 @@ public class Di_Chuyen {
     private float vX = 0, vY = 0;
     private float tocDo = 250f;
     private float lucNhay = 450f;
+    private float lucNhayKep = 250f;
     private float trongLuc = -500f;
+    private int soLanNhay = 0;
 
     private boolean flipX = false;
     private boolean dangdungdat = true;
@@ -36,7 +38,12 @@ public class Di_Chuyen {
             vY = lucNhay;
             dangdungdat = false;
             dangnhay = true;
+            soLanNhay = 1;
             trangthai = TRANGTHAI.NHAY;
+        }else if (soLanNhay == 1 && !dangdungdat){
+            vY = lucNhayKep;
+            soLanNhay = 2;
+            trangthai = TRANGTHAI.NHAYKEP;
         }
     }
     public void roi(){
@@ -54,13 +61,16 @@ public class Di_Chuyen {
             y = 0;
             dangdungdat = true;
             dangnhay = false;
-            if (vX == 0){
-                trangthai = TRANGTHAI.DUNGYEN;
-            }else trangthai = TRANGTHAI.CHAY;
+            soLanNhay = 0;
+            if (vX == 0) trangthai = TRANGTHAI.DUNGYEN;
+            else trangthai = TRANGTHAI.CHAY;
         }
         else {
             dangdungdat = false;
-            if (vY > 0) trangthai = TRANGTHAI.NHAY;
+            if (vY > 0) {
+                if (soLanNhay == 1) trangthai = TRANGTHAI.NHAY;
+                else if (soLanNhay == 2) trangthai = TRANGTHAI.NHAYKEP;
+            }
             else trangthai = TRANGTHAI.ROI;
         }
     }
