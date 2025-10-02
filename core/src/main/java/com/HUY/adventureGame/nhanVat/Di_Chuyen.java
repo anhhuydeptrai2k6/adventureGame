@@ -5,8 +5,8 @@ import com.badlogic.gdx.Gdx;
 public class Di_Chuyen {
     private float x, y;
     private float vX = 0, vY = 0;
-    private float tocDo = 120f;
-    private float lucNhay = 300f;
+    private float tocDo = 250f;
+    private float lucNhay = 450f;
     private float trongLuc = -500f;
 
     private boolean flipX = false;
@@ -18,12 +18,12 @@ public class Di_Chuyen {
     public void sangphai(){
         vX = tocDo;
         flipX = false;
-        trangthai = TRANGTHAI.CHAY;
+        if (dangdungdat) trangthai = TRANGTHAI.CHAY;
     }
     public void sangtrai(){
         vX = -tocDo;
         flipX = true;
-        trangthai = TRANGTHAI.CHAY;
+        if (dangdungdat) trangthai = TRANGTHAI.CHAY;
     }
     public void dungim(){
         vX = 0;
@@ -49,7 +49,7 @@ public class Di_Chuyen {
         x += vX * delta;
         y += vY * delta;
         vY += trongLuc*delta;
-        if (y < 0){
+        if (y <= 0){
             vY = 0;
             y = 0;
             dangdungdat = true;
@@ -57,6 +57,11 @@ public class Di_Chuyen {
             if (vX == 0){
                 trangthai = TRANGTHAI.DUNGYEN;
             }else trangthai = TRANGTHAI.CHAY;
+        }
+        else {
+            dangdungdat = false;
+            if (vY > 0) trangthai = TRANGTHAI.NHAY;
+            else trangthai = TRANGTHAI.ROI;
         }
     }
 

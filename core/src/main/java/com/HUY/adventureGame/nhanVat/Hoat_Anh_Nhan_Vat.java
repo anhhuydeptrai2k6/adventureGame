@@ -81,9 +81,9 @@ public class Hoat_Anh_Nhan_Vat {
                 veNhanVat = roi;
         }
         if (flipX){
-            batch.draw(veNhanVat, x + 32, y, -32, 32);
+            batch.draw(veNhanVat, x + 32*2, y, -(32*2), 32*2);
         }else {
-            batch.draw(veNhanVat, x, y, 32, 32);
+            batch.draw(veNhanVat, x, y, 32*2, 32*2);
         }
     }
 }
