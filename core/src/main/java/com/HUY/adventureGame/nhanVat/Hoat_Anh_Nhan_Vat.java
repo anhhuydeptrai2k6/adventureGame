@@ -13,7 +13,7 @@ public class Hoat_Anh_Nhan_Vat {
     private Texture roi;
 
     private float timedoiframe = 0;
-    private int frame = 0;
+    private int[] frame = new int[3];
 
 
     public Hoat_Anh_Nhan_Vat(){
@@ -55,24 +55,22 @@ public class Hoat_Anh_Nhan_Vat {
 
     public void capnhat(float delta, TRANGTHAI trangthai){
         switch (trangthai){
+            timedoiframe += Gdx.graphics.getDeltaTime();
             case DUNGYEN:
-                timedoiframe += Gdx.graphics.getDeltaTime();
                 if (timedoiframe > 0.05f){
-                    frame = (frame + 1) % dungyen.length;
+                    frame[0] = (frame[0] + 1) % dungyen.length;
                     timedoiframe = 0;
                 }
                 break;
             case CHAY:
-                timedoiframe += Gdx.graphics.getDeltaTime();
                 if (timedoiframe > 0.05f){
-                    frame = (frame + 1) % chay.length;
+                    frame[1] = (frame[1] + 1) % chay.length;
                     timedoiframe = 0;
                 }
                 break;
             case NHAYKEP:
-                timedoiframe += Gdx.graphics.getDeltaTime();
                 if (timedoiframe > 0.05f){
-                    frame = (frame + 1) % nhaykep.length;
+                    frame[2] = (frame[2] + 1) % nhaykep.length;
                     timedoiframe = 0;
                 }
                 break;
