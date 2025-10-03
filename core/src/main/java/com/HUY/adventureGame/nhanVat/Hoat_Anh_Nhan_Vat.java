@@ -54,8 +54,8 @@ public class Hoat_Anh_Nhan_Vat {
     }
 
     public void capnhat(float delta, TRANGTHAI trangthai){
+        timedoiframe += Gdx.graphics.getDeltaTime();
         switch (trangthai){
-            timedoiframe += Gdx.graphics.getDeltaTime();
             case DUNGYEN:
                 if (timedoiframe > 0.05f){
                     frame[0] = (frame[0] + 1) % dungyen.length;
