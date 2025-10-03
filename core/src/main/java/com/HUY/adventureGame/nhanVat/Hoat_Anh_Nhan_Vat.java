@@ -81,16 +81,16 @@ public class Hoat_Anh_Nhan_Vat {
         Texture veNhanVat = dungyen[0];
         switch (trangthai){
             case DUNGYEN:
-                veNhanVat = dungyen[frame];
+                veNhanVat = dungyen[frame[0]];
                 break;
             case CHAY:
-                veNhanVat = chay[frame];
+                veNhanVat = chay[frame[1]];
                 break;
             case NHAY:
                 veNhanVat = nhay;
                 break;
             case NHAYKEP:
-                veNhanVat = nhaykep[frame];
+                veNhanVat = nhaykep[frame[2]];
                 break;
             case ROI:
                 veNhanVat = roi;
