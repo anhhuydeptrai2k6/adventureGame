@@ -11,7 +11,10 @@ public class Lay_Vung_Dat {
         Pixmap anh = new Pixmap(Gdx.files.internal(linkanh));
         ArrayList<Rectangle> danhsach = new ArrayList<>();
 
+        ArrayList<Rectangle> hangtruoc = new ArrayList<>();
+
         for (int y = 0; y<anh.getHeight(); y++){
+            ArrayList<Rectangle> hangnay = new ArrayList<>();
             int batdau = -1;
             for (int x = 0; x <anh.getWidth(); x++){
                 int pixel = anh.getPixel(x, y);
@@ -23,15 +26,30 @@ public class Lay_Vung_Dat {
                 else {
                     if (batdau != -1){
                         int chieurong = x - batdau;
-                        danhsach.add(new Rectangle(batdau, y, chieurong, 1));
+                        float yThuc = anh.getHeight() - 1 - y;
+                        hangnay.add(new Rectangle(batdau, yThuc, chieurong, 1));
                         batdau = -1;
                     }
                 }
             }
             if (batdau != -1){
                 int chieurong = anh.getWidth() - batdau;
-                danhsach.add(new Rectangle(batdau, y, chieurong, 1));
+                float yThuc = anh.getHeight() - 1 - y;
+                hangnay.add(new Rectangle(batdau, yThuc, chieurong, 1));
             }
+            for (Rectangle moi : hangnay){
+                boolean dagop = false;
+                for (Rectangle cu : hangtruoc){
+                    if (moi.x == cu.x && moi.width == cu.width && moi.y + moi.height == cu.y){
+                        cu.y = moi.y;
+                        cu.height += 1;
+                        dagop = true;
+                        break;
+                    }
+                }
+                if (!dagop) danhsach.add(moi);
+            }
+            hangtruoc = hangnay;
         }
         anh.dispose();
         return danhsach;
