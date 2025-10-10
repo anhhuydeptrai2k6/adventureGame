@@ -37,19 +37,25 @@ public class Lay_Vung_Dat {
                 float yThuc = anh.getHeight() - 1 - y;
                 hangnay.add(new Rectangle(batdau, yThuc, chieurong, 1));
             }
+
+            ArrayList<Rectangle> hangmoi = new ArrayList<>();
             for (Rectangle moi : hangnay){
                 boolean dagop = false;
                 for (Rectangle cu : hangtruoc){
                     if (moi.x == cu.x && moi.width == cu.width && moi.y + moi.height == cu.y){
                         cu.y = moi.y;
                         cu.height += 1;
+                        hangmoi.add(cu);
                         dagop = true;
                         break;
                     }
                 }
-                if (!dagop) danhsach.add(moi);
+                if (!dagop){
+                    danhsach.add(moi);
+                    hangmoi.add(moi);
+                }
             }
-            hangtruoc = hangnay;
+            hangtruoc = hangmoi;
         }
         anh.dispose();
         return danhsach;
