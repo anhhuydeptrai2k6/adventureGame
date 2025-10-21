@@ -1,9 +1,12 @@
 package com.HUY.adventureGame.nhanVat;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Di_Chuyen {
     private float x, y;
+    private float rong = 32*2;
+    private float cao = 32*2;
     private float vX = 0, vY = 0;
     private float tocDo = 250f;
     private float lucNhay = 450f;
@@ -47,7 +50,8 @@ public class Di_Chuyen {
         }
     }
     public void roi(){
-        if (!dangdungdat && dangnhay){
+        if (!dangdungdat){
+            dangnhay = false;
             trangthai = TRANGTHAI.ROI;
         }
     }
@@ -56,35 +60,68 @@ public class Di_Chuyen {
         x += vX * delta;
         y += vY * delta;
         vY += trongLuc*delta;
+
+        if (dangdungdat){
+            if (vX == 0) trangthai = TRANGTHAI.DUNGYEN;
+            else trangthai = TRANGTHAI.CHAY;
+        }else {
+            if (vY > 0){
+                if (soLanNhay == 1) trangthai = TRANGTHAI.NHAY;
+                if (soLanNhay == 2) trangthai = TRANGTHAI.NHAYKEP;
+            }
+            else trangthai = TRANGTHAI.ROI;
+        }
         if (y <= 0){
             vY = 0;
             y = 0;
             dangdungdat = true;
             dangnhay = false;
             soLanNhay = 0;
-            if (vX == 0) trangthai = TRANGTHAI.DUNGYEN;
-            else trangthai = TRANGTHAI.CHAY;
-        }
-        else {
-            dangdungdat = false;
-            if (vY > 0) {
-                if (soLanNhay == 1) trangthai = TRANGTHAI.NHAY;
-                else if (soLanNhay == 2) trangthai = TRANGTHAI.NHAYKEP;
-            }
-            else trangthai = TRANGTHAI.ROI;
+            trangthai = TRANGTHAI.DUNGYEN;
         }
     }
 
+    public void setViTri(float x, float y){
+        this.x = x;
+        this.y = y;
+    }
     public float getX(){
         return x;
     }
     public float getY(){
         return y;
     }
+    public float getvX(){
+        return vX;
+    }
+    public float getvY(){
+        return vY;
+    }
+    public void setX(float x){
+        this.x = x;
+    }
+    public void setY(float y){
+        this.y = y;
+    }
+    public void setvX(float vX){
+        this.vX = vX;
+    }
+    public void setvY(float vY){
+        this.vY = vY;
+    }
+    public void setDangDungDat(boolean dangdungdat){
+        this.dangdungdat = dangdungdat;
+    }
+    public void setDangnhay(boolean dangnhay){
+        this.dangnhay = dangnhay;
+    }
     public TRANGTHAI getTrangthai(){
         return trangthai;
     }
     public boolean danglat(){
         return flipX;
+    }
+    public Rectangle getRectangle(){
+        return new Rectangle(x, y, rong, cao);
     }
 }

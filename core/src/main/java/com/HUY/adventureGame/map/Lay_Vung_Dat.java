@@ -18,9 +18,9 @@ public class Lay_Vung_Dat {
             int batdau = -1;
             for (int x = 0; x <anh.getWidth(); x++){
                 int pixel = anh.getPixel(x, y);
-                int alpha = pixel & 0xff;
+                int alpha = (pixel >>> 24) & 0xff;
 
-                if (alpha > 0){
+                if (alpha > 50){
                     if (batdau == -1) batdau = x;
                 }
                 else {
