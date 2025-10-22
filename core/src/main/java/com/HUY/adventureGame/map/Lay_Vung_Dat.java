@@ -20,7 +20,7 @@ public class Lay_Vung_Dat {
                 int pixel = anh.getPixel(x, y);
                 int alpha = (pixel >>> 24) & 0xff;
 
-                if (alpha > 50){
+                if (alpha > 80){
                     if (batdau == -1) batdau = x;
                 }
                 else {

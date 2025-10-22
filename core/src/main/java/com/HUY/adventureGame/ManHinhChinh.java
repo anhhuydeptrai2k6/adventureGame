@@ -1,8 +1,10 @@
 package com.HUY.adventureGame;
 
+import com.HUY.adventureGame.heThong.Game_Camera;
 import com.HUY.adventureGame.heThong.MainGame;
 import com.HUY.adventureGame.heThong.Thao_Tac;
 import com.HUY.adventureGame.heThong.Va_Cham;
+import com.HUY.adventureGame.map.Gioi_Han_Map;
 import com.HUY.adventureGame.map.Lay_Vung_Dat;
 import com.HUY.adventureGame.map.Loai_Dat;
 import com.HUY.adventureGame.map.Vung_Dat;
@@ -32,6 +34,11 @@ public class ManHinhChinh implements Screen {
 
     ArrayList<Vung_Dat> danhSachDat= new ArrayList<>();
 
+    private Game_Camera gameCamera;
+    private Gioi_Han_Map gioiHanMap;
+    private float mapW;
+    private float mapH;
+
     public ManHinhChinh(MainGame game){
         this.game = game;
     }
@@ -49,23 +56,31 @@ public class ManHinhChinh implements Screen {
         Gdx.input.setInputProcessor(thaoTac);
 
         map = new Texture("map/map.png");
+        mapW = map.getWidth();
+        mapH = map.getHeight();
 
         for (Rectangle rectangle : Lay_Vung_Dat.layRectangle("map/map.png")){
             danhSachDat.add(new Vung_Dat(rectangle, Loai_Dat.DATCUNG));
         }
+
+        gameCamera = new Game_Camera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), mapW, mapH);
+        gioiHanMap = new Gioi_Han_Map(mapW, mapH);
     }
 
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1f);
         camera.update();
-        batch.setProjectionMatrix(camera.combined);
+        batch.setProjectionMatrix(gameCamera.getCamera().combined);
 
         nhanVat.act(delta);
 
         for (Vung_Dat vungDat : danhSachDat){
             Va_Cham.xetVaCham(nhanVat.getDiChuyen(), vungDat);
         }
+
+        gioiHanMap.Gioi_Han(nhanVat.getDiChuyen());
+        gameCamera.follow(nhanVat.getDiChuyen().getX(), nhanVat.getDiChuyen().getY());
 
         batch.begin();
         batch.draw(map, 0, 0);
